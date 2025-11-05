@@ -12,8 +12,8 @@ It provides three interactive dashboards:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/orderbook-visualizer.git
-cd orderbook-visualizer
+git clone https://github.com/shrejarachaprolu/Frontend-Project.git
+cd orderbook
 ```
 
 ### 2. Install Dependencies
