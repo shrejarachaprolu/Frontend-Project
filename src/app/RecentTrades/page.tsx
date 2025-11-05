@@ -16,7 +16,7 @@ export default function LiveTrades() {
   const [flashIds, setFlashIds] = useState<Set<number>>(new Set());
   const [inSync, setInSync] = useState(true);
 
-  // ✅ Correctness check for live trades (throttled)
+  //  Correctness check for live trades (throttled)
 useEffect(() => {
   const check = async () => {
     if (!trades.length) return; // no trades yet, skip
@@ -40,7 +40,7 @@ useEffect(() => {
       const qtyDiff = Math.abs(restQty - socketQty);
       const timeDiff = Math.abs(restTime - socketTime);
 
-      // ✅ allow small drift (e.g., a few ms or minor rounding diff)
+      //  allow small drift (e.g., a few ms or minor rounding diff)
       const isClose =
         priceDiff < 1 && qtyDiff < 0.001 && timeDiff < 10_000; // 10 seconds
 
@@ -55,7 +55,7 @@ useEffect(() => {
 }, [trades]);
 
 
-  // 🔹 Create pulse on each new trade
+  //  Create pulse on each new trade
   useEffect(() => {
     if (trades.length === 0) return;
     const t = trades[0];
@@ -72,7 +72,7 @@ useEffect(() => {
     return () => clearTimeout(timeout);
   }, [trades]);
 
-  // 🔹 Flash animation for new trade row
+  //  Flash animation for new trade row
   useEffect(() => {
     if (trades.length > 0) {
       const newestId = trades[0].id;
@@ -88,7 +88,7 @@ useEffect(() => {
     }
   }, [trades]);
 
-  // 🔹 Compute buy/sell ratio for gauge
+  //  Compute buy/sell ratio for gauge
   const { buyRatio, sellRatio } = useMemo(() => {
     const buys = trades.filter((t) => !t.isBuyerMaker).reduce((s, t) => s + t.quantity, 0);
     const sells = trades.filter((t) => t.isBuyerMaker).reduce((s, t) => s + t.quantity, 0);
