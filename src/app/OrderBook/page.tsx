@@ -270,7 +270,7 @@ export default function OrderBook() {
       {/* ---------- TOOLTIP ---------- */}
       {tooltipData && (
         <div
-          className={`fixed z-50 pointer-events-none text-xs px-3 py-2 rounded-md shadow-lg backdrop-blur-md border ${
+          className={`absolute z-50 pointer-events-none text-xs px-3 py-2 rounded-md shadow-lg backdrop-blur-md border ${
             tooltipData.side === "bid"
               ? "bg-green-900/80 border-green-400/40 text-green-100"
               : "bg-red-900/80 border-red-400/40 text-red-100"
