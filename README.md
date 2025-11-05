@@ -37,7 +37,7 @@ npm start
 
 ---
 
-## 🧱 Project Structure
+##  Project Structure
 
 ```
 app/
@@ -67,7 +67,7 @@ app/
 - **Memoized subcomponents** (`React.memo`) like `OrderRow` to reduce re-renders under high-frequency WebSocket updates.
 - **Cumulative depth calculations** and **memoized totals** to ensure smooth visualization even with rapid data flow.
 
-### 🔍 Data Correctness
+###  Data Correctness
 - Periodically verifies WebSocket data against Binance’s REST API to ensure the UI remains **in sync**.
 - Displays a clear **“In Sync / Out of Sync”** status indicator on each data panel.
 
