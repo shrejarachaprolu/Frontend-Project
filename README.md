@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Real-Time Order Book & Trade Visualizer
+
+A **Next.js + TypeScript** application that visualizes **live crypto market data** from Binance’s WebSocket API.  
+It provides three interactive dashboards:
+- **Order Book** — live bid/ask depth view  
+- **Recent Trades** — real-time trade pulse and activity gauge  
+- **Combined View** — both order book and trades side by side  
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
+### 1. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/orderbook-visualizer.git
+cd orderbook-visualizer
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
+Use npm :
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Run the Development Server
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+### 4. Build and Start for Production
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧱 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+ ├── page.tsx               # Home screen with navigation options
+ ├── OrderBook/page.tsx     # Live order book component
+ ├── RecentTrades/page.tsx  # Live trades visualizer
+ ├── Both/page.tsx          # Combined dashboard
+ └── hooks/
+      ├── useOrderBook.ts   # WebSocket hook for order book data
+      └── useTrades.ts      # WebSocket hook for trades data
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+##  Design Choices & Trade-offs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+###  UI / Styling
+- **Tailwind CSS** for fast, expressive, and consistent styling.
+- **Gradient backgrounds** and **glassmorphism effects** for a sleek, modern trading dashboard look.
+- **Animated elements** (hover, pulse, and sync indicators) for responsive and intuitive user feedback.
+
+###  State Management
+- Used **React hooks** (`useState`, `useEffect`, `useMemo`, `useCallback`) for component-level state.
+
+
+###  Performance
+- **Memoized subcomponents** (`React.memo`) like `OrderRow` to reduce re-renders under high-frequency WebSocket updates.
+- **Cumulative depth calculations** and **memoized totals** to ensure smooth visualization even with rapid data flow.
+
+### 🔍 Data Correctness
+- Periodically verifies WebSocket data against Binance’s REST API to ensure the UI remains **in sync**.
+- Displays a clear **“In Sync / Out of Sync”** status indicator on each data panel.
+
+---
+
+##  Features
+
+ Real-time updates via Binance WebSocket  
+ Live visualization of market depth (bids/asks)  
+ Animated trade pulses and buy/sell ratio gauge  
+ Adjustable order book depth selector  
+ Combined dashboard for comprehensive view  
+ Visual correctness & synchronization indicators  
+ Modern responsive UI with Tailwind and gradients  
+
+---
+
+##  Tech Stack
+
+- **Next.js 14** (App Router)
+- **React 18**
+- **TypeScript**
+- **Tailwind CSS**
+- **Binance WebSocket API**
+
+
+
+##  Design Rationale Example
+
+> “I chose to use **React hooks and memoization** instead of Zustand because the project only needs **local state per component**. Zustand would add unnecessary complexity for this scope. Hooks allow efficient and isolated updates while keeping the logic transparent.”
+
+---
+
+##  Deployment (Vercel)
+
+Deploy instantly on **Vercel**:
+```bash
+npm run build
+vercel deploy
+```
