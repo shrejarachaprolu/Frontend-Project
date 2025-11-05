@@ -45,9 +45,9 @@ app/
  ├── OrderBook/page.tsx     # Live order book component
  ├── RecentTrades/page.tsx  # Live trades visualizer
  ├── Both/page.tsx          # Combined dashboard
- └── hooks/
-      ├── useOrderBook.ts   # WebSocket hook for order book data
-      └── useTrades.ts      # WebSocket hook for trades data
+hooks/
+ ├── useOrderBook.ts   # WebSocket hook for order book data
+ └── useTrades.ts      # WebSocket hook for trades data
 ```
 
 ---
@@ -60,7 +60,7 @@ app/
 - **Animated elements** (hover, pulse, and sync indicators) for responsive and intuitive user feedback.
 
 ###  State Management
-- Used **React hooks** (`useState`, `useEffect`, `useMemo`, `useCallback`) for component-level state.
+- Used **React hooks** (`useState`, `useEffect`, `useMemo`, `useCallback`,`useRef`) for component-level state.
 
 
 ###  Performance
@@ -106,5 +106,4 @@ app/
 Deploy instantly on **Vercel**:
 ```bash
 npm run build
-vercel deploy
 ```
