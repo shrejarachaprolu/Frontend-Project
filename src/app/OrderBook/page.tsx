@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { useOrderBook } from "@/hooks/useOrderBook";
 
-// 🧩 Memoized row component to avoid re-rendering unchanged levels
+//  Memoized row component to avoid re-rendering unchanged levels
 const OrderRow = React.memo(function OrderRow({
   price,
   qty,
@@ -57,9 +57,9 @@ export default function OrderBook() {
   } | null>(null);
 
   const [inSync, setInSync] = useState(true);
-  const [depth, setDepth] = useState(30); // ✅ selected depth (default 30)
+  const [depth, setDepth] = useState(30); //  selected depth (default 30)
 
-  // ✅ useMemo to avoid recomputing lists unless hook data changes
+  //  useMemo to avoid recomputing lists unless hook data changes
   const bidList = bids.slice(0, depth);
   const askList = asks.slice(0, depth);
 
@@ -67,7 +67,7 @@ export default function OrderBook() {
   const [lowestAsk, lowestAskQty] = askList.length ? askList[0] : [0, 0];
   const spread = useMemo(() => lowestAsk - highestBid, [lowestAsk, highestBid]);
 
-  // ✅ Memoize cumulative totals
+  //  Memoize cumulative totals
   const bidTotals = useMemo(() => {
     let totals: number[] = [];
     let acc = 0;
@@ -91,7 +91,7 @@ export default function OrderBook() {
   const maxBidTotal = useMemo(() => Math.max(...bidTotals, 1), [bidTotals]);
   const maxAskTotal = useMemo(() => Math.max(...askTotals, 1), [askTotals]);
 
-  // ✅ Correctness check (throttled)
+  //  Correctness check (throttled)
   useEffect(() => {
     const check = async () => {
       if (!bids.length || !asks.length) return;
@@ -115,7 +115,7 @@ export default function OrderBook() {
     return () => clearInterval(interval);
   }, [bids, asks]);
 
-  // ✅ Memoize callbacks
+  //  Memoize callbacks
   const handleMouseEnter = useCallback(
     (e: React.MouseEvent, price: number, side: "bid" | "ask") => {
       setTooltip({
@@ -138,7 +138,7 @@ export default function OrderBook() {
 
   const handleMouseLeave = useCallback(() => setTooltip(null), []);
 
-  // ✅ Tooltip data
+  //  Tooltip data
   const tooltipData = useMemo(() => {
     if (!tooltip) return null;
     const list = tooltip.side === "bid" ? bidList : askList;
